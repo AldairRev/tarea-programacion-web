@@ -1,0 +1,84 @@
+:root {
+    --main-color-hue: 0;
+
+    --bg-color: hsl(var(--main-color-hue), 30%,40%);
+    --bg-color-light: hsl(var(--main-color-hue), 60%,80%);
+    --bg-color-dark: hsl(var(--main-color-hue), 10%,20%);
+    --main-color-light: hsl(var(--main-color-hue), 55%,75%);
+    --main-color-dark: hsl(var(--main-color-hue), 20%,25%);
+}
+
+.bg-main-color {
+    background-color: var(--bg-color);
+}
+
+.main-color-text-light {
+    color: var(--main-color-light);
+}
+
+.main-color-text-dark {
+    color: var(--main-color-dark);
+}
+
+.bg-logo  {
+    background-image: url('../img/xps-kLfkVa_4aXM-unsplash-min.jpg');
+    background-position: center center;
+    background-size: cover;
+    height: calc(50vh - 56px);
+}
+
+.bg-overlay {
+    background-color: #000a;
+}
+
+.bg-pricing {
+    background-color: var(--bg-color-dark);
+}
+.btn-main-color {
+    color: white;
+    background-color: var(--bg-color);
+    border-color: hsl(var(--main-color-hue), 60%,32%);
+}
+
+.btn-main-color:active {
+    color: #fff;
+    background-color: hsl(var(--main-color-hue), 60%,34%) !important;
+    border-color: hsl(var(--main-color-hue), 62%,31%);
+}
+
+.btn-main-color:hover {
+    color: #fff;
+    background-color: hsl(var(--main-color-hue), 60%,34%);
+    border-color: hsl(var(--main-color-hue), 62%,31%);
+}
+
+.btn-main-color:focus {
+    color: #fff;
+    box-shadow: 0 0 0 .2rem hsla(var(--main-color-hue), 30%,40%,.5);
+}
+
+#logo-svg {
+    fill: var(--main-color-light);
+    width: 80px;
+}
+
+#add-svg {
+    fill: var(--bg-color);
+    height: 80px;
+}
+
+#check-svg {
+    fill: var(--bg-color);
+    margin-right: 10px;
+}
+
+#imgAddProducto {
+    height: 200px;
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.toast-header {
+    color: var(--bg-color);
+}
