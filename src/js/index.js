@@ -12,7 +12,7 @@ $(document).ready(function () {
 });
 
 //Add values to Edit Product Form
-$(".btn-edit-product").click(function () {
+$(document).on("click", ".btn-edit-product", function(e) {
     const id_attr = $(this).attr("id");
     const id_num = id_attr.split("-")[1];
     $.ajax({
@@ -30,11 +30,10 @@ $(".btn-edit-product").click(function () {
             $("#imgEditProducto").attr("style","background-image: url('src/img/products/" + data.image + "')");
         }
     });
-    
 });
 
 //Add values to delete Product Form
-$(".btn-delete-product").click(function () {
+$(document).on("click", ".btn-delete-product", function(e) {
     const id_attr = $(this).attr("id");
     const id_num = id_attr.split("-")[1];
     $.ajax({
@@ -50,15 +49,14 @@ $(".btn-delete-product").click(function () {
             $("#imgDeleteProducto").attr("style","background-image: url('src/img/products/" + data.image + "')");
         }
     });
-    
 });
 
 //Add Image Preview to Forms
 $("#producto_image").change(function() {
-    readURL(this);
+    addProductReadURL(this);
 });
 
-function readURL(input) {
+function addProductReadURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
         
@@ -71,10 +69,10 @@ function readURL(input) {
 }
 
 $("#edit_image").change(function() {
-    readURL(this);
+    editProductReadURL(this);
 });
 
-function readURL(input) {
+function editProductReadURL(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
         
