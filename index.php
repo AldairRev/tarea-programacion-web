@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Akunosu | Home</title>
+    <title>あくのす | Home</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="src/css/style.css">
 </head>
@@ -133,7 +133,7 @@
                         foreach ($productos as $p) {
                     ?>
                     <div class="col-md-6 col-xl-4">
-                        <div id="product-<?php echo $p->id ?>" class="card mb-4 shadow-sm">
+                        <div class="card mb-4 shadow-sm">
                             <div style="background-image: url('src/img/products/<?php echo $p->image ?>'); background-position: center center; background-size: cover; height: 300px; width: 100%;"></div>
                             <div class="card-body">
                                 <h5 class="card-title"><?php echo $p->nombre ?></h5>
@@ -142,8 +142,10 @@
                                 <h4 class="card-text font-weight-bold text-success text-right mb-5">S/. <? echo $p->precio ?></h4>
                                 <div class="d-flex justify-content-center align-items-center">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-info">Editar</button>
-                                        <button type="button" class="btn btn-sm btn-outline-danger">Borrar</button>
+                                        <button id="btnEdit-<?php echo $p->id ?>" type="button" class="btn-edit-product btn btn-sm btn-outline-info" data-toggle="modal" data-target="#modal-edit-product">
+                                            Editar
+                                        </button>
+                                        <button id="btnDelete-<?php echo $p->id ?>" type="button" class="btn-delete-product btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#modal-delete-product">Borrar</button>
                                     </div>
                                 </div>
                             </div>
@@ -235,7 +237,10 @@
                     </div>
                     <div class="modal-body">
                         <form id="form-add-product" method="POST" enctype="multipart/form-data">
-                            <div class="form-group">
+                            <div>
+                                <div id="imgAddProducto" style="background-image: url('src/img/products/no-imagen.jpg')"></div>
+                            </div>
+                            <div class="form-group mt-3"">
                                 <label for="exampleInputNombre">Nombre del Producto</label>
                                 <input type="text" class="form-control" id="producto_nombre" name="nombre" placeholder="Ejemplo: Samsung - Galaxy S10" required>
                                 <small class="form-text text-muted">Nombre que sea preciso y conciso. Ejemplo: Samsung - Galaxy S10</small>
@@ -244,9 +249,7 @@
                                 <label for="exampleFormControlDescripcion">Descripcion del Producto</label>
                                 <textarea class="form-control" id="producto_descripcion" name="descripcion" rows="3" placeholder="El producto presenta..."></textarea>
                             </div>
-                            <div>
-                                <div id="imgAddProducto" style="background-image: url('src/img/products/no-imagen.jpg')"></div>
-                            </div>
+                            
                             <div class="form-group">
                                 <label for="exampleFormControlFile1">Subir Imagen</label>
                                 <input type="file" class="form-control-file" name="producto_image"  id="producto_image">
@@ -254,16 +257,97 @@
                             <div class="form-row">
                                 <div class="col">
                                     <label for="exampleInputPrecio">Precio S/.</label>
-                                    <input type="number" class="form-control" id="producto_nombre" name="precio" placeholder="S/xx.xx" step="0.01" min=0 required>
+                                    <input type="number" class="form-control" id="producto_precio" name="precio" placeholder="S/xx.xx" step="0.01" min=0 required>
                                 </div>
                                 <div class="col">
                                     <label for="exampleInputNombre">Cantidad</label>
-                                    <input type="number" class="form-control" id="producto_nombre" name="cantidad" placeholder="0" step="1" min=0 required>
+                                    <input type="number" class="form-control" id="producto_cantidad" name="cantidad" placeholder="0" step="1" min=0 required>
                                 </div>
                             </div>
                             <div class="modal-footer mt-3">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                 <button type="submit" class="btn btn-main-color">Subir Producto</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Editar Producto-->
+        <div class="modal fade" id="modal-edit-product" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Editar Producto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="form-edit-product" method="POST" enctype="multipart/form-data">
+                            <input type="hidden" id="edit_id" name="id" required>
+                            <div>
+                                <div id="imgEditProducto" style="background-image: url('src/img/products/no-imagen.jpg')"></div>
+                            </div>
+                            <div class="form-group mt-3"">
+                                <label for="exampleInputNombre">Nombre del Producto</label>
+                                <input type="text" class="form-control" id="edit_nombre" name="nombre" placeholder="Ejemplo: Samsung - Galaxy S10" required>
+                                <small class="form-text text-muted">Nombre que sea preciso y conciso. Ejemplo: Samsung - Galaxy S10</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlDescripcion">Descripcion del Producto</label>
+                                <textarea class="form-control" id="edit_descripcion" name="descripcion" rows="3" placeholder="El producto presenta..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlFile1">Subir Imagen</label>
+                                <input type="file" class="form-control-file" name="edit_image" id="edit_image">
+                            </div>
+                            <div class="form-row">
+                                <div class="col">
+                                    <label for="exampleInputPrecio">Precio S/.</label>
+                                    <input type="number" class="form-control" id="edit_precio" name="precio" placeholder="S/xx.xx" step="0.01" min=0 required>
+                                </div>
+                                <div class="col">
+                                    <label for="exampleInputNombre">Cantidad</label>
+                                    <input type="number" class="form-control" id="edit_cantidad" name="cantidad" placeholder="0" step="1" min=0 required>
+                                </div>
+                            </div>
+                            <div class="modal-footer mt-3">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-info">Actualizar Producto</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Eliminar Producto-->
+        <div class="modal fade" id="modal-delete-product" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Eliminar Producto</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="form-delete-product" method="POST">
+                            <input type="hidden" id="delete_id" name="id" required>
+                            <div>
+                                <div id="imgDeleteProducto" style="background-image: url('src/img/products/no-imagen.jpg')"></div>
+                            </div>
+                            <div class="form-group mt-3">
+                                <input type="text" style="font-size: 24px; font-weight: bold" readonly class="form-control-plaintext text-center" id="delete_nombre" name="nombre" placeholder="Ejemplo: Samsung - Galaxy S10" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control-plaintext text-center" readonly id="delete_descripcion" name="descripcion" rows="3" placeholder="El producto presenta..."></textarea>
+                            </div>
+                            <div class="modal-footer mt-3">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-danger">Eliminar Producto</button>
                             </div>
                         </form>
                     </div>
@@ -279,15 +363,6 @@
             </div>
             <div class="toast-body py-3">
                 <strong id="msg-toast-exito">Exito</strong>
-            </div>
-        </div>
-        <div class="toast toast-denegado" style="position: fixed; top: 80px; right: 20px; z-index: 20" data-delay="6000">
-            <div class="toast-header py-3">
-                <svg id="error-svg" width="20px" height="20px" viewBox="0 0 365.71733 365" xmlns="http://www.w3.org/2000/svg"><g><path d="m356.339844 296.347656-286.613282-286.613281c-12.5-12.5-32.765624-12.5-45.246093 0l-15.105469 15.082031c-12.5 12.503906-12.5 32.769532 0 45.25l286.613281 286.613282c12.503907 12.5 32.769531 12.5 45.25 0l15.082031-15.082032c12.523438-12.480468 12.523438-32.75.019532-45.25zm0 0"/><path d="m295.988281 9.734375-286.613281 286.613281c-12.5 12.5-12.5 32.769532 0 45.25l15.082031 15.082032c12.503907 12.5 32.769531 12.5 45.25 0l286.632813-286.59375c12.503906-12.5 12.503906-32.765626 0-45.246094l-15.082032-15.082032c-12.5-12.523437-32.765624-12.523437-45.269531-.023437zm0 0"/></g></svg>
-                <strong class="mr-auto">Accion Denegada</strong>
-            </div>
-            <div class="toast-body py-3">
-                <strong id="msg-toast-denegado">Denegado</strong>
             </div>
         </div>
     </div>

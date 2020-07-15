@@ -84,6 +84,20 @@
     background-repeat: no-repeat;
 }
 
+#imgEditProducto {
+    height: 180px;
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+#imgDeleteProducto {
+    height: 180px;
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
 .toast-header {
     color: var(--bg-color);
 }
