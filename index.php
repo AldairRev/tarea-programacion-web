@@ -223,9 +223,9 @@
             </div>
         </div>  
         <div>
-            <!-- Modal Agregar Producto-->
-            <div class="modal fade" id="modal-add-product" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
+        <!-- Modal Agregar Producto-->
+        <div class="modal fade" id="modal-add-product" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Agregar Producto</h5>
@@ -234,7 +234,7 @@
                     </button>
                     </div>
                     <div class="modal-body">
-                        <form action="" method="POST">
+                        <form id="form-add-product" method="POST" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label for="exampleInputNombre">Nombre del Producto</label>
                                 <input type="text" class="form-control" id="producto_nombre" name="nombre" placeholder="Ejemplo: Samsung - Galaxy S10" required>
@@ -248,8 +248,8 @@
                                 <div id="imgAddProducto" style="background-image: url('src/img/products/no-imagen.jpg')"></div>
                             </div>
                             <div class="form-group">
-                                <label for="exampleFormControlFile1">Example file input</label>
-                                <input type="file" class="form-control-file" nombre="imagen" id="producto_image">
+                                <label for="exampleFormControlFile1">Subir Imagen</label>
+                                <input type="file" class="form-control-file" name="producto_image"  id="producto_image">
                             </div>
                             <div class="form-row">
                                 <div class="col">
@@ -261,7 +261,7 @@
                                     <input type="number" class="form-control" id="producto_nombre" name="cantidad" placeholder="0" step="1" min=0 required>
                                 </div>
                             </div>
-                            <div class="modal-footer mt-5">
+                            <div class="modal-footer mt-3">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                 <button type="submit" class="btn btn-main-color">Subir Producto</button>
                             </div>
@@ -272,23 +272,32 @@
             </div>
         </div>
         <!-- Toast -->
-        <div class="toast" style="position: fixed; top: 80px; right: 20px; z-index: 20" data-delay="6000">
+        <div class="toast toast-exito" style="position: fixed; top: 80px; right: 20px; z-index: 20" data-delay="6000">
             <div class="toast-header py-3">
                 <svg id="check-svg" height="20px" viewBox="0 -46 417.81333 417" xmlns="http://www.w3.org/2000/svg"><path d="m159.988281 318.582031c-3.988281 4.011719-9.429687 6.25-15.082031 6.25s-11.09375-2.238281-15.082031-6.25l-120.449219-120.46875c-12.5-12.5-12.5-32.769531 0-45.246093l15.082031-15.085938c12.503907-12.5 32.75-12.5 45.25 0l75.199219 75.203125 203.199219-203.203125c12.503906-12.5 32.769531-12.5 45.25 0l15.082031 15.085938c12.5 12.5 12.5 32.765624 0 45.246093zm0 0"/></svg>
                 <strong class="mr-auto">Accion Exitosa</strong>
             </div>
             <div class="toast-body py-3">
-                <strong class="">El producto se agrego correctamente.</strong>
+                <strong id="msg-toast-exito">Exito</strong>
+            </div>
+        </div>
+        <div class="toast toast-denegado" style="position: fixed; top: 80px; right: 20px; z-index: 20" data-delay="6000">
+            <div class="toast-header py-3">
+                <svg id="error-svg" width="20px" height="20px" viewBox="0 0 365.71733 365" xmlns="http://www.w3.org/2000/svg"><g><path d="m356.339844 296.347656-286.613282-286.613281c-12.5-12.5-32.765624-12.5-45.246093 0l-15.105469 15.082031c-12.5 12.503906-12.5 32.769532 0 45.25l286.613281 286.613282c12.503907 12.5 32.769531 12.5 45.25 0l15.082031-15.082032c12.523438-12.480468 12.523438-32.75.019532-45.25zm0 0"/><path d="m295.988281 9.734375-286.613281 286.613281c-12.5 12.5-12.5 32.769532 0 45.25l15.082031 15.082032c12.503907 12.5 32.769531 12.5 45.25 0l286.632813-286.59375c12.503906-12.5 12.503906-32.765626 0-45.246094l-15.082032-15.082032c-12.5-12.523437-32.765624-12.523437-45.269531-.023437zm0 0"/></g></svg>
+                <strong class="mr-auto">Accion Denegada</strong>
+            </div>
+            <div class="toast-body py-3">
+                <strong id="msg-toast-denegado">Denegado</strong>
             </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js" integrity="sha512-WNLxfP/8cVYL9sj8Jnp6et0BkubLP31jhTG9vhL/F5uEZmg5wEzKoXp1kJslzPQWwPT1eyMiSxlKCgzHLOTOTQ==" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
     <script src="src/js/index.js"></script>
     <script src="src/js/dashboard.js"></script>
-    <script src="src/js/toast.js"></script>
+    <script src="src/js/submit.js"></script>
 </body>
 </html>

@@ -72,8 +72,13 @@
     margin-right: 10px;
 }
 
+#error-svg {
+    fill: var(--bg-color);
+    margin-right: 10px;
+}
+
 #imgAddProducto {
-    height: 200px;
+    height: 180px;
     background-position: center center;
     background-size: contain;
     background-repeat: no-repeat;
