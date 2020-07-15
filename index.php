@@ -317,6 +317,9 @@
                 </div>
             </div>
         </div>
+        <div id="loader-wrapper">
+            
+        </div>
         <!-- Toast -->
         <div class="toast toast-exito" style="position: fixed; top: 80px; right: 20px; z-index: 20" data-delay="6000">
             <div class="toast-header py-3">

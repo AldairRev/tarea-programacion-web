@@ -7,8 +7,8 @@ let root = document.documentElement;
 root.style.setProperty('--main-color-hue', color_hue[i_color_hue]);
 
 //Load Page
-$(document).ready(function () {
-    
+$(window).on('load', function () {
+    $("#loader-wrapper").delay(350).fadeOut('slow');
 });
 
 //Add values to Edit Product Form
