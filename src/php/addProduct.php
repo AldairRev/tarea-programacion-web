@@ -28,7 +28,11 @@
             $image = "no-imagen.jpg";
         } else {
             $image = $newfilename;
-            move_uploaded_file($_FILES["producto_image"]["tmp_name"], $target_file);
+            if (move_uploaded_file($_FILES["producto_image"]["tmp_name"], $target_file)) {
+                echo "Se subio";
+            } else {
+                echo "No se subio";
+            }
         }
         // Insert to Database
         $sql = "INSERT INTO productos(nombre, descripcion, precio, cantidad, `image`)
